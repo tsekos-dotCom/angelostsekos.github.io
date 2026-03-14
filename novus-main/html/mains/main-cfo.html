@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αρχική</title>
+    <link rel="stylesheet" href="/../../css/menu.css">
+    <link rel="stylesheet" href="/../../css/mains.css">
+  </head>
+
+  <body>
+    <div id="menu"></div>
+  
+    <div class="main-content">
+      <h2>Καλωσήρθατε, <span id="fullname"></span>!</h2>
+    </div>
+
+    <div class="dashboard">
+      <header>
+        <h2>Πίνακας ελέγχου - ISKIOS</h2>
+      </header>
+      <section class="box">
+        <h2>Κατάσταση Παραγγελιών</h2>
+        <ul>
+          <li><span class="dot blue"></span> 35 Νέες Παραγγελίες</li>
+          <li><span class="dot orange"></span> 120 Σε Εξέλιξη</li>
+          <li><span class="dot green"></span> 8 Ολοκληρωμένες</li>
+          <li><span class="dot red"></span> 2 Ακυρωμένες</li>
+        </ul>
+      </section>
+      <section class="box big">
+        <h2>Σχόλια</h2>
+        <ul>
+          <li><strong>Σχόλιο 1: </strong> Πληρωμή του προμηθευτή X έως ΗΗ/ΜΜ/ΕΕ.</li>
+          <hr>
+          <li><strong>Σχόλιο 2: </strong> Οριστικοποίηση μισθοδοσίας Απριλίου.</li>
+          <hr>
+          <li><strong>Σχόλιο 3: </strong> Έλεγχος καθυστερημένων πληρωμών για πελάτη Y.</li>
+          <hr>
+          <li><strong>Σχόλιο 4: </strong> Καταγραφή τιμολογίων Μαρτίου. </li>
+        </ul>
+      </section>
+    </div>
+
+    <script>
+      const loggedUser = localStorage.getItem("loggedUser");
+      fetch("../../json/user_info.json")
+        .then(response => response.json())
+        .then(users => {
+          const user = users.find(u => u.username === loggedUser);
+          if (user) {
+            document.getElementById("fullname").textContent = user.fullname;
+          } else {
+            document.getElementById("fullname").textContent = "Χρήστης";
+          }
+        })
+        .catch(error => {
+          console.error("Σφάλμα κατά τη φόρτωση των δεδομένων:", error);
+          document.getElementById("fullname").textContent = "Χρήστης";
+        });
+    </script>
+
+    <script src="../../javascript/menu-loader.js"></script>
+    <script src="../../javascript/navigations.js"></script>
+  </body>
+</html>

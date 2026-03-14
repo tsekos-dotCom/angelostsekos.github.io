@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αρχική</title>
+    <link rel="stylesheet" href="/../../css/pages.css">
+    <link rel="stylesheet" href="/../../css/menu.css">
+    <link rel="stylesheet" href="/../../css/main-p&o.css">
+  </head>
+
+  <body>
+    <div id="menu"></div>
+  
+    <div class="main-content">
+      <h2>Καλωσήρθατε, <span id="fullname"></span>!</h2>
+    </div>
+    
+    <div class="dashboard">
+      <header>
+        <h2>Πίνακας ελέγχου - ISKIOS</h2>
+      </header>
+      <section class="box">
+        <h2>Παραγωγή</h2>
+        <ul>
+          <li>Απόδοση παραγωγής: 92%</li>
+          <li>Έγκαιρες παραδόσεις: 86%</li>
+          <li>Μέσος χρόνος παράδοσης: 12,5 ημέρες</li>
+        </ul>
+      </section>
+      <section class="box Narrow">
+        <h2>Αποθέματα πρώτων υλών</h2>
+        <table class="materials-table">
+          <thead>
+            <tr>
+              <th>Όνομα Υλικού</th>
+              <th>Διαθέσιμο Απόθεμα</th>
+              <th>Μονάδα</th>
+              <th>Προμηθευτής</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Άλουμινο</td>
+              <td>150 </td>
+              <td>Κιλά</td>
+              <td>AluTech</td>
+            </tr>
+            <tr>
+              <td>Ύφασμα</td>
+              <td>75</td>
+              <td>Τετραγωνικά μέτρα</td>
+              <td>GlassCo</td>
+            </tr>
+            <tr>
+              <td>Τσιμέντο</td>
+              <td>200 </td>
+              <td>Κιλά</td>
+              <td>CementPro</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section class="box">
+        <h2>Κατανομή εργασιών</h2>
+        <div class="task">
+          <label>Κοπή Υφάσματος</label>
+          <div class="progress"><div style="width: 25%;"></div></div>
+        </div>
+        <div class="task">
+          <label>Ραφή</label>
+          <div class="progress"><div style="width: 35%;"></div></div>
+        </div>
+        <div class="task">
+          <label>Συναρμολόγηση Σκελετού</label>
+          <div class="progress"><div style="width: 40%;"></div></div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      const loggedUser = localStorage.getItem("loggedUser");
+      fetch("../../json/user_info.json")
+        .then(response => response.json())
+        .then(users => {
+          const user = users.find(u => u.username === loggedUser);
+          if (user) {
+            document.getElementById("fullname").textContent = user.fullname;
+          } else {
+            document.getElementById("fullname").textContent = "Χρήστης";
+          }
+        })
+        .catch(error => {
+          console.error("Σφάλμα κατά τη φόρτωση των δεδομένων:", error);
+          document.getElementById("fullname").textContent = "Χρήστης";
+      });
+    </script>
+    
+    <script src="../../javascript/menu-loader.js"></script>
+    <script src="../../javascript/navigations.js"></script>
+  </body>
+</html>

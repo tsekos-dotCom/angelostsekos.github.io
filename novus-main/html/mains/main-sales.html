@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Αρχική</title>
+    <link rel="stylesheet" href="/../../css/pages.css">
+    <link rel="stylesheet" href="/../../css/menu.css">
+    <link rel="stylesheet" href="/../../css/main-sales.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+    <div id="menu"></div>
+  
+    <div class="main-content">
+      <h2>Καλωσήρθατε, <span id="fullname"></span>!<br><br></h2>
+
+      <header>
+        <h2>Πίνακας ελέγχου - ISKIOS</h2>
+      </header>
+        <div class="dashboard-grid">
+          <div class="stats-column">
+            <div class="stat-card">
+              <h3>Μηνιαίες Πωλήσεις</h3>
+              <p class="stat-value" id="monthly-sales">34.000 €</p>
+            </div>
+            <div class="stat-card">
+              <h3>Στόχος</h3>
+              <p class="stat-value" id="sales-target">50.000 €</p>
+            </div>
+            <div class="stat-card">
+              <h3>Πραγματοποίηση Στόχου</h3>
+              <p class="stat-value" id="target-progress">68 %</p>
+            </div>
+          </div>
+          <div class="chart-column">
+            <div class="chart-container">
+              <h3>Πωλήσεις εξαμήνου</h3>
+              <canvas id="salesTrendChart"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="recent-orders">
+          <h3>Πρόσφατες Παραγγελίες</h3>
+          <div class="table-wrapper">
+            <table id="orders-table">
+              <thead>
+                <tr>
+                  <th>Α/Α</th>
+                  <th>Πελάτης</th>
+                  <th>Ποσό</th>
+                  <th>Κατάσταση</th>
+                </tr>
+              </thead>
+              <tbody><tbody>
+                <tr>
+                  <td>#2345</td>
+                  <td>Πελάτης Γ.Π.</td>
+                  <td>€2.450</td>
+                  <td><span class="status-badge ολοκληρώθηκε">Ολοκληρώθηκε</span></td>
+                </tr>
+                <tr>
+                  <td>#2346</td>
+                  <td>Εταιρεία ΑΒΕ</td>
+                  <td>€850</td>
+                  <td><span class="status-badge εκκρεμεί">Εκκρεμεί</span></td>
+                </tr>
+                <tr>
+                  <td>#2347</td>
+                  <td>Μ.Κωνσταντινίδης</td>
+                  <td>€4.200</td>
+                  <td><span class="status-badge ολοκληρώθηκε">Ολοκληρώθηκε</span></td>
+                </tr>
+              </tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const loggedUser = localStorage.getItem("loggedUser");
+      fetch("../../json/user_info.json")
+        .then(response => response.json())
+        .then(users => {
+          const user = users.find(u => u.username === loggedUser);
+          if (user) {
+            document.getElementById("fullname").textContent = user.fullname;
+          } else {
+            document.getElementById("fullname").textContent = "Χρήστης";
+          }
+        })
+        .catch(error => {
+          console.error("Σφάλμα κατά τη φόρτωση των δεδομένων:", error);
+          document.getElementById("fullname").textContent = "Χρήστης";
+      });
+    </script>
+
+    <script>
+      const ctx = document.getElementById('salesTrendChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Ιαν', 'Φεβ', 'Μαρ', 'Απρ', 'Μαι', 'Ιουν'],
+          datasets: [{
+            label: 'Ιστορικό Πωλήσεων',
+            data: [22000, 27000, 30000, 24000, 34000, 20000],
+            borderColor: '#007bff',
+            fill: false,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'bottom' }
+          },
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    </script>
+
+    <script src="../../javascript/menu-loader.js"></script>
+    <script src="../../javascript/navigations.js"></script>
+  </body>
+</html>

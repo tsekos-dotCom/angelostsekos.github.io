@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Παραγγελίες</title>
+    <link rel="stylesheet" href="/../../css/pages.css">
+    <link rel="stylesheet" href="/../../css/menu.css">
+  </head>
+
+  <body>
+    <div id="menu"></div>
+
+    <div class="main-content">
+      <div class="header-row">
+        <h2>Παραγγελίες</h2>
+
+        <button class="new-order-btn" onclick="location.href='neworder.html';">+ Νέα Παραγγελία</button>
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Αναζήτηση παραγγελίας...">
+      </div>
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Αρ. Παραγγελίας</th>
+            <th>Πελάτης</th>
+            <th>Ημ. Καταχώρησης</th>
+            <th>Ημ. Παράδοσης</th>
+            <th>Κατάσταση</th>
+            <th>Ενέργειες</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>#OR1234</td>
+            <td>Άγγελος Τσέκος</td>
+            <td>13/04/2025</td>
+            <td>30/04/2025</td>
+            <td><span class="status delivered">Ολοκληρώθηκε</span></td>
+            <td><button class="action-btn">Προβολή</button></td>
+          </tr>
+          <tr>
+            <td>#OR1235</td>
+            <td>Στεφανία Γεωργίου</td>
+            <td>30/04/2025</td>
+            <td>–</td>
+            <td><span class="status pending">Εκκρεμεί</span></td>
+            <td><button class="action-btn">Προβολή</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const ordersTableBody = document.querySelector(".orders-table tbody");
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+    
+        orders.forEach(order => {
+          const row = document.createElement("tr");
+    
+          row.innerHTML = `
+            <td>#${order.id}</td>
+            <td>${order.customer}</td>
+            <td>${formatDate(order.dateCreated)}</td>
+            <td>${order.deliveryDate || "–"}</td>
+            <td><span class="status ${order.status === 'Εκκρεμεί' ? 'pending' : 'delivered'}">${order.status}</span></td>
+            <td><button class="action-btn">Προβολή</button></td>
+          `;
+    
+          ordersTableBody.appendChild(row);
+        });
+    
+        function formatDate(isoDate) {
+          const [year, month, day] = isoDate.split("-");
+          return `${day}/${month}/${year}`;
+        }
+      });
+    </script>
+    
+    <script src="../../javascript/menu-loader.js"></script>
+    <script src="../../javascript/navigations.js"></script>
+  </body>
+</html>
