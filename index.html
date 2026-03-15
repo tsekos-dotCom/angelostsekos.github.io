@@ -561,11 +561,16 @@ footer a{color:var(--ink2);text-decoration:none}
 <script>
 (function(){
   var e=String.fromCharCode(97,103,103,101,108,111,115,116,115,101,107,111,115,50,48,48,53,64,103,109,97,105,108,46,99,111,109);
-  var a=document.getElementById('em');
   var l=document.getElementById('eml');
-  if(a){a.href='mailto:'+e;}
   if(l){l.textContent=e;}
+  window._em=e;
 })();
+function copyEmail(){
+  navigator.clipboard.writeText(window._em).then(function(){
+    var v=document.getElementById('emv');
+    if(v){v.textContent='Copied!';setTimeout(function(){v.textContent='Click to copy';},2000);}
+  });
+}
 window.addEventListener('scroll',()=>{
   const y=window.scrollY;
   document.getElementById('nav').classList.toggle('scrolled',y>40);
@@ -600,9 +605,6 @@ document.getElementById('contactForm').addEventListener('submit',async function(
     else throw new Error();
   }catch{document.getElementById('formError').style.display='block';btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> Send Message';}
 });
-</script>
-</body>
-</html>
 </script>
 </body>
 </html>
