@@ -19,7 +19,7 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,0.07)}
 .nav-logo span{color:var(--accent)}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
 .nav-links a{color:var(--ink2);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--accent)}.nav-links a.nav-active{color:var(--accent);font-weight:600;position:relative}.nav-links a.nav-active::after{content:"";position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:var(--accent);border-radius:1px}
+.nav-links a:hover{color:var(--accent)}.nav-links li a.nav-active{color:var(--accent)!important;font-weight:600!important;background:transparent!important;position:relative}.nav-links li a.nav-active::after{content:"";position:absolute;bottom:-5px;left:0;right:0;height:2px;background:var(--accent);border-radius:2px}.nav-links a.nav-active::after{content:"";position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:var(--accent);border-radius:1px}
 .nav-cta{background:var(--ink)!important;color:#fff!important;padding:.38rem 1rem;border-radius:6px}
 .nav-cta:hover{background:var(--accent)!important}
 .hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px}
@@ -161,7 +161,7 @@ h2 em{font-style:italic;color:var(--accent)}
 footer{text-align:center;padding:2.2rem 6%;border-top:1px solid var(--border);color:var(--ink3);font-size:.74rem;font-weight:300;letter-spacing:.02em}
 footer a{color:var(--ink2);text-decoration:none}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.reveal{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
 .reveal.visible{opacity:1;transform:none}
 @media(max-width:960px){
   #hero{flex-direction:column}
@@ -185,7 +185,7 @@ footer a{color:var(--ink2);text-decoration:none}
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact" class="nav-cta">Contact</a></li>
+    <li><a href="#contact" class="nav-cta" id="navContact">Contact</a></li>
   </ul>
   <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></div>
 </nav>
@@ -414,11 +414,7 @@ footer a{color:var(--ink2);text-decoration:none}
     <div>
       <p class="contact-intro-text">Always open to connecting &mdash; whether it's a collaboration, a professional opportunity, a thesis partnership, or simply a conversation about data, technology and business.</p>
       <div class="contact-methods">
-        <a href="/cdn-cgi/l/email-protection#d1b0b6b6b4bdbea2a5a2b4babea2e3e1e1e491b6bcb0b8bdffb2bebc" class="cm-link">
-          <div class="cm-icon"><i class="fa-solid fa-envelope"></i></div>
-          <div><div class="cm-label"><span class="__cf_email__" data-cfemail="a0c1c7c7c5cccfd3d4d3c5cbcfd392909095e0c7cdc1c9cc8ec3cfcd">[email&#160;protected]</span></div></div>
-          <i class="fa-solid fa-arrow-right cm-arrow"></i>
-        </a>
+        
         <a href="https://www.linkedin.com/in/angelos-tsekos" target="_blank" class="cm-link">
           <div class="cm-icon"><i class="fa-brands fa-linkedin"></i></div>
           <div><div class="cm-label">linkedin.com/in/angelos-tsekos</div><div class="cm-value">LinkedIn &mdash; connect &amp; message</div></div>
@@ -552,7 +548,7 @@ footer a{color:var(--ink2);text-decoration:none}
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
   <i class="fa-solid fa-arrow-up"></i>
 </button>
 <style>
@@ -569,19 +565,29 @@ window.addEventListener('scroll',()=>{
   const y=window.scrollY;
   document.getElementById('nav').classList.toggle('scrolled',y>40);
   document.getElementById('btt').classList.toggle('visible',y>400);
-  // Active nav
-  const sections=['hero','about','skills','projects','experience','contact'];
-  let current='';
-  sections.forEach(id=>{
-    const el=document.getElementById(id);
-    if(el && el.getBoundingClientRect().top<=120) current=id;
-  });
-  document.querySelectorAll('.nav-links a').forEach(a=>{
-    a.classList.toggle('nav-active',a.getAttribute('href')==='#'+current);
-  });
 });
-const io=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*90);io.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Active nav
+function updateNav(){
+  var ids=['about','skills','projects','experience','contact'];
+  var best='';
+  ids.forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    var rect=el.getBoundingClientRect();
+    if(rect.top<=160) best=id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    var href=a.getAttribute('href');
+    if(!href||!href.startsWith('#')) return;
+    var active=href==='#'+best;
+    a.classList.toggle('nav-active',active);
+  });
+}
+window.addEventListener('scroll',updateNav,{passive:true});
+window.addEventListener('load',updateNav);
+updateNav();
+
 function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
 function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
 function closeOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
