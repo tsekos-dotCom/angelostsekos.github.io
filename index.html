@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Angelos Tsekos — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f5f3ee;--bg2:#fdfcf9;--card:#fff;--border:#dedad0;--ink:#18170f;--ink2:#4a4740;--ink3:#908c82;--accent:#2c5f3f;--accent-bg:#edf4ef;--accent-bd:#b8d4c2;--tag-bg:#eeece6;--tag-c:#4a4740}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:.9rem 6%;background:rgba(245,243,238,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,0.07)}
+.nav-logo{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--ink);text-decoration:none}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{color:var(--ink2);text-decoration:none;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--accent)}.nav-links li a.nav-active{color:var(--accent)!important;font-weight:600!important;background:transparent!important;position:relative}.nav-links li a.nav-active::after{content:"";position:absolute;bottom:-5px;left:0;right:0;height:2px;background:var(--accent);border-radius:2px}.nav-links a.nav-active::after{content:"";position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:var(--accent);border-radius:1px}
+.nav-cta{background:var(--ink)!important;color:#fff!important;padding:.38rem 1rem;border-radius:6px}
+.nav-cta:hover{background:var(--accent)!important}
+.hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px}
+.hamburger span{width:22px;height:1.5px;background:var(--ink);border-radius:2px}
+#hero{min-height:100vh;display:flex;align-items:center;padding:8rem 6% 5rem;border-bottom:1px solid var(--border);overflow:hidden;gap:3.5rem}
+.hero-text-col{flex:1;display:block;min-width:0}
+.hero-inner{width:100%;display:block}
+.hero-photo-col{flex-shrink:0;display:flex;align-items:center}
+.hero-photo{width:300px;height:385px;object-fit:cover;object-position:50% 22%;display:block;border-radius:12px;border:2px solid var(--accent-bd);box-shadow:0 0 0 6px var(--accent-bg),0 12px 40px rgba(44,95,63,0.1)}
+.hero-eyebrow{display:flex;align-items:center;gap:.7rem;margin-bottom:1.5rem;animation:fadeUp .5s ease both}
+.eyebrow-line{width:28px;height:1.5px;background:var(--accent)}
+.eyebrow-text{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(2.6rem,4.5vw,4.5rem);line-height:.95;letter-spacing:-0.03em;color:var(--ink);animation:fadeUp .5s .08s ease both;margin-bottom:1.1rem}
+h1 em{font-style:italic;color:var(--accent)}
+.hero-divider{width:36px;height:1.5px;background:var(--border);margin-bottom:1.1rem;animation:fadeUp .5s .14s ease both}
+.hero-desc{font-size:.97rem;color:var(--ink2);font-weight:300;animation:fadeUp .5s .16s ease both;line-height:1.75}
+.hero-desc strong{color:var(--ink);font-weight:500}
+.hero-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem;animation:fadeUp .5s .22s ease both}
+.htag{background:transparent;border:1px solid var(--accent-bd);color:var(--accent);font-size:.7rem;font-weight:500;padding:.22rem .75rem;border-radius:100px}
+.hero-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.7rem;animation:fadeUp .5s .3s ease both}
+.btn{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem 1.4rem;border-radius:6px;font-size:.855rem;font-weight:500;text-decoration:none;font-family:'DM Sans',sans-serif;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 6px 20px rgba(44,95,63,0.25)}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--border)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px)}
+.btn-sm{padding:.45rem 1rem;font-size:.8rem}
+section{padding:6rem 6%}
+section:nth-child(even){background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.section-label{display:flex;align-items:center;gap:.7rem;margin-bottom:.6rem}
+.sl-line{width:20px;height:1.5px;background:var(--accent)}
+.sl-text{font-size:.67rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(1.8rem,3vw,2.7rem);line-height:1.1;letter-spacing:-0.02em;color:var(--ink);margin-bottom:2.5rem}
+h2 em{font-style:italic;color:var(--accent)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-text p{color:var(--ink2);margin-bottom:1rem;font-weight:300;font-size:.97rem}
+.about-text strong{color:var(--ink);font-weight:500}
+.edu-stack{display:flex;flex-direction:column;gap:.9rem}
+.edu-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.3rem 1.3rem 1.3rem 1.6rem;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--accent)}
+.edu-card:hover{border-color:var(--accent-bd);transform:translateX(3px)}
+.edu-card-uni{font-weight:600;font-size:.91rem;color:var(--ink);margin-bottom:.15rem}
+.edu-card-deg{font-size:.78rem;color:var(--accent);font-weight:500;margin-bottom:.3rem}
+.edu-card-date{font-size:.71rem;color:var(--ink3)}
+.edu-card-info{font-size:.76rem;color:var(--ink2);margin-top:.45rem;font-weight:300;line-height:1.6}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.skill-cat{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.3rem;transition:border-color .2s,box-shadow .2s}
+.skill-cat:hover{border-color:var(--accent-bd);box-shadow:0 4px 20px rgba(44,95,63,0.06)}
+.skill-cat-head{display:flex;align-items:center;gap:.65rem;margin-bottom:.9rem}
+.skill-cat-icon{width:30px;height:30px;border-radius:6px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.82rem}
+.skill-cat-name{font-weight:600;font-size:.84rem;color:var(--ink)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.skill-tag{background:var(--tag-bg);color:var(--tag-c);font-size:.72rem;font-weight:400;padding:.2rem .65rem;border-radius:4px;border:1px solid var(--border)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.3rem}
+.proj-card{background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .3s,transform .3s,box-shadow .3s}
+.proj-card:hover{border-color:var(--accent-bd);transform:translateY(-4px);box-shadow:0 14px 35px rgba(0,0,0,0.07)}
+.proj-logo-banner{height:110px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border)}
+.proj-logo-banner.dark{background:#0d1520}
+.proj-logo-banner.forest{background:#152a1e}
+.proj-logo-banner img{max-height:44px;max-width:150px;object-fit:contain}
+.proj-type-header{padding:1.1rem 1.3rem .3rem;display:flex;align-items:center;gap:.6rem}
+.proj-type-icon{width:36px;height:36px;border-radius:7px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.95rem;flex-shrink:0}
+.proj-top{padding:.9rem 1.3rem .75rem;border-bottom:1px solid var(--border)}
+.proj-top.nbt{border-top:1px solid var(--border)}
+.proj-type{font-size:.63rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem}
+.proj-name{font-family:'DM Serif Display',serif;font-size:1.25rem;letter-spacing:-0.01em;color:var(--ink);margin-bottom:.18rem}
+.proj-sub{font-size:.78rem;color:var(--ink3);font-weight:300}
+.proj-body{padding:1rem 1.3rem;flex:1}
+.proj-desc{font-size:.81rem;color:var(--ink2);margin-bottom:.8rem;font-weight:300;line-height:1.65}
+.feat-list{list-style:none;display:flex;flex-direction:column;gap:.28rem;margin-bottom:.85rem}
+.feat-list li{font-size:.75rem;color:var(--ink2);display:flex;align-items:flex-start;gap:.45rem}
+.feat-list li::before{content:"--";color:var(--accent);flex-shrink:0;opacity:.7}
+.proj-tags{display:flex;flex-wrap:wrap;gap:.28rem}
+.proj-tag{background:var(--tag-bg);color:var(--ink3);font-size:.68rem;font-weight:400;padding:.15rem .55rem;border-radius:3px}
+.proj-foot{padding:.8rem 1.3rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:flex-end;gap:.8rem;flex-wrap:wrap}
+.proj-link{display:inline-flex;align-items:center;gap:.32rem;font-size:.76rem;font-weight:600;color:var(--accent);text-decoration:none;transition:color .2s;background:none;border:none;font-family:'DM Sans',sans-serif;cursor:pointer;padding:0}
+.proj-link:hover{color:var(--ink)}
+.proj-link-sep{color:var(--border)}
+.modal-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(20,18,14,0.8);align-items:center;justify-content:center;padding:1.5rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border);border-radius:12px;width:100%;max-width:860px;overflow:hidden;display:flex;flex-direction:column;max-height:90vh}
+.modal-sm{max-width:460px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.4rem;border-bottom:1px solid var(--border);flex-shrink:0}
+.modal-title{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--ink)}
+.modal-close{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;background:var(--tag-bg);border:1px solid var(--border);cursor:pointer;color:var(--ink2);font-size:.85rem;transition:background .2s}
+.modal-close:hover{background:var(--border)}
+.modal-body{overflow-y:auto;padding:1.3rem;display:flex;flex-direction:column;gap:1rem}
+.modal-slides{border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.modal-slide{display:none}
+.modal-slide.active{display:block}
+.modal-slide img{width:100%;display:block}
+.modal-slide-nav{display:flex;align-items:center;justify-content:center;gap:.45rem;padding:.7rem;background:var(--bg);border-top:1px solid var(--border)}
+.msn-dot{width:7px;height:7px;border-radius:50%;background:var(--border);cursor:pointer;transition:background .2s}
+.msn-dot.active{background:var(--accent)}
+.msn-arrow{background:none;border:1px solid var(--border);border-radius:5px;width:28px;height:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink2);font-size:.65rem;transition:border-color .2s}
+.msn-arrow:hover{border-color:var(--accent);color:var(--accent)}
+.modal-features{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.modal-feat{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:.85rem 1rem}
+.modal-feat-title{font-weight:600;font-size:.82rem;color:var(--ink);margin-bottom:.25rem;display:flex;align-items:center;gap:.4rem}
+.modal-feat-title i{color:var(--accent);font-size:.78rem}
+.modal-feat-desc{font-size:.76rem;color:var(--ink2);font-weight:300;line-height:1.6}
+.modal-foot{padding:.9rem 1.4rem;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:.7rem;flex-shrink:0}
+.step{display:flex;gap:.9rem;align-items:flex-start}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:.7rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.2rem}
+.step-title{font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:.15rem}
+.step-desc{font-size:.8rem;color:var(--ink2);font-weight:300;line-height:1.6}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.2rem}
+.exp-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.4rem;position:relative;overflow:hidden;transition:border-color .2s}
+.exp-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);opacity:0;transition:opacity .2s}
+.exp-card:hover::after{opacity:1}
+.exp-card:hover{border-color:var(--accent-bd)}
+.exp-badge{display:inline-flex;align-items:center;gap:.3rem;background:var(--accent-bg);border:1px solid var(--accent-bd);color:var(--accent);font-size:.65rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.15rem .55rem;border-radius:100px;margin-bottom:.6rem}
+.exp-date{font-size:.68rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:.35rem}
+.exp-role{font-family:'DM Serif Display',serif;font-size:1.12rem;color:var(--ink);margin-bottom:.1rem}
+.exp-co{font-size:.8rem;color:var(--ink3);margin-bottom:.7rem}
+.exp-pts{list-style:none;display:flex;flex-direction:column;gap:.28rem}
+.exp-pts li{font-size:.78rem;color:var(--ink2);font-weight:300;display:flex;gap:.45rem;align-items:flex-start;line-height:1.6}
+.exp-pts li::before{content:"·";color:var(--accent);font-size:.9rem;flex-shrink:0;line-height:1.6}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4.5rem;align-items:start}
+.contact-intro-text{color:var(--ink2);font-weight:300;margin-bottom:1.6rem;font-size:.97rem}
+.contact-methods{display:flex;flex-direction:column;gap:.65rem}
+.cm-link{display:flex;align-items:center;gap:.9rem;background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:.75rem .95rem;text-decoration:none;color:var(--ink);transition:border-color .2s,transform .2s}
+.cm-link:hover{border-color:var(--accent-bd);transform:translateX(3px)}
+.cm-icon{width:30px;height:30px;border-radius:6px;background:var(--accent-bg);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:.82rem;flex-shrink:0}
+.cm-label{font-size:.84rem;font-weight:500;color:var(--ink)}
+.cm-value{font-size:.71rem;color:var(--ink3)}
+.cm-arrow{color:var(--border);font-size:.65rem;margin-left:auto}
+.contact-form{display:flex;flex-direction:column;gap:.8rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.fgroup{display:flex;flex-direction:column;gap:.28rem}
+.fgroup label{font-size:.67rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.fgroup input,.fgroup select,.fgroup textarea{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.62rem .85rem;color:var(--ink);font-family:'DM Sans',sans-serif;font-size:.85rem;font-weight:300;outline:none;resize:vertical;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+.fgroup input:focus,.fgroup select:focus,.fgroup textarea:focus{border-color:var(--accent)}
+.fgroup input::placeholder,.fgroup textarea::placeholder{color:var(--ink3)}
+.fgroup textarea{min-height:105px}
+.fgroup select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23908c82' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .8rem center;padding-right:2rem}
+.form-note{font-size:.71rem;color:var(--ink3);font-weight:300}
+.form-success{display:none;background:var(--accent-bg);border:1px solid var(--accent-bd);color:var(--accent);border-radius:6px;padding:.65rem .9rem;font-size:.81rem;font-weight:500}
+.form-error{display:none;background:#fdf2f2;border:1px solid #f5c6c6;color:#a83232;border-radius:6px;padding:.65rem .9rem;font-size:.81rem;font-weight:500}
+footer{text-align:center;padding:2.2rem 6%;border-top:1px solid var(--border);color:var(--ink3);font-size:.74rem;font-weight:300;letter-spacing:.02em}
+footer a{color:var(--ink2);text-decoration:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:1;transform:none;transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:960px){
+  #hero{flex-direction:column}
+  .hero-text-col{padding:7rem 6% 2rem;order:2}
+  .hero-photo-col{width:100%;height:320px;order:1}
+  .hero-photo{min-height:320px;object-position:50% 22%}
+  .about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .form-row,.modal-features{grid-template-columns:1fr}
+  h1{font-size:2.8rem}
+  .nav-links{display:none;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--bg);padding:1.5rem 6%;border-bottom:1px solid var(--border);gap:1.2rem}
+  .nav-links.open{display:flex}
+  .hamburger{display:flex}
+}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <a href="#hero" class="nav-logo">Angelos<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact" class="nav-cta" id="navContact">Contact</a></li>
+  </ul>
+  <div class="hamburger" onclick="document.getElementById('navLinks').classList.toggle('open')"><span></span><span></span><span></span></div>
+</nav>
+
+<section id="hero">
+  <div class="hero-text-col"><div class="hero-inner">
+  <div class="hero-eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-text">Athens, Greece</span></div>
+  <h1>Angelos<br><em>Tsekos</em></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">Management Science &amp; Technology student bridging <strong>data analytics</strong> and <strong>information systems</strong>. I build tools and dashboards that turn raw data into decisions.</p>
+  <div class="hero-tags">
+    <span class="htag">AUEB &middot; 2023&ndash;2027</span>
+    <span class="htag">Erasmus+ Alumni</span>
+    <span class="htag">Business Analytics</span>
+    <span class="htag">Data Visualisation</span>
+    <span class="htag">Information Systems</span>
+  </div>
+  <div class="hero-actions">
+    <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+    <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-paper-plane"></i> Get in Touch</a>
+    <a href="https://www.linkedin.com/in/angelos-tsekos" target="_blank" class="btn btn-outline"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+    <a href="CV-Tsekos-Angelos.pdf" download class="btn btn-outline"><i class="fa-solid fa-file-arrow-down"></i> Download CV</a>
+  </div>
+  </div></div>
+  <div class="hero-photo-col"><img src="photo.png" alt="Angelos Tsekos" class="hero-photo"/></div>
+</section>
+
+<section id="about">
+  <div class="section-label"><div class="sl-line"></div><span class="sl-text">About Me</span></div>
+  <h2>Data, strategy &amp;<br><em>real-world impact</em></h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I am a <strong>Management Science &amp; Technology</strong> student at AUEB, specialising in Business Analytics and Information Systems. I enjoy working where technical thinking and business context overlap &mdash; from designing data pipelines and modelling business processes to applying quantitative methods, statistics and probability to real-world problems.</p>
+      <p>My toolkit spans from writing Spring Boot backends and SQL pipelines to building Power BI and Tableau dashboards that make numbers useful for decision-makers.</p>
+      <p>In 2025 I completed an <strong>Erasmus+ Exchange</strong> at the University of Antwerp, where master-level coursework in Digital Transformation and cross-team international projects sharpened how I communicate ideas across disciplines.</p>
+      <p>Outside of studies: fitness, music (self-taught), sustainability in business strategy, and traveling.</p>
+    </div>
+    <div class="edu-stack">
+      <div class="edu-card">
+        <div class="edu-card-uni">Athens University of Business &amp; Economics</div>
+        <div class="edu-card-deg">B.Sc. Management Science &amp; Technology</div>
+        <div class="edu-card-date">Sep 2023 &ndash; Jun 2027 &middot; Athens, Greece</div>
+        <div class="edu-card-info">Specialisation: Business Analytics &amp; Information Systems. Coursework: Database Systems, Data Analytics &amp; ML, Data Structures, Process Modelling, Information Systems, Digital Marketing, Mathematical Programming &amp; Optimisation.</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-card-uni">University of Antwerp</div>
+        <div class="edu-card-deg">Erasmus+ Exchange &middot; Faculty of Business &amp; Economics</div>
+        <div class="edu-card-date">Sep 2025 &ndash; Jan 2026 &middot; Antwerp, Belgium</div>
+        <div class="edu-card-info">Selected on academic merit. Master-level coursework: Strategic Management, Digital Transformation, Digital Innovation, Sociology. International team projects and presentations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label"><div class="sl-line"></div><span class="sl-text">Skills</span></div>
+  <h2>What I work with</h2>
+  <div class="skills-grid">
+    <div class="skill-cat reveal">
+      <div class="skill-cat-head"><div class="skill-cat-icon"><i class="fa-solid fa-code"></i></div><span class="skill-cat-name">Programming &amp; Development</span></div>
+      <div class="skill-tags"><span class="skill-tag">Java</span><span class="skill-tag">Spring Boot</span><span class="skill-tag">Python</span><span class="skill-tag">Pandas / NumPy</span><span class="skill-tag">JavaScript</span><span class="skill-tag">HTML / CSS</span><span class="skill-tag">SQL</span><span class="skill-tag">Maven</span><span class="skill-tag">Git</span></div>
+    </div>
+    <div class="skill-cat reveal">
+      <div class="skill-cat-head"><div class="skill-cat-icon"><i class="fa-solid fa-chart-bar"></i></div><span class="skill-cat-name">Data &amp; Analytics</span></div>
+      <div class="skill-tags"><span class="skill-tag">Power BI</span><span class="skill-tag">Tableau</span><span class="skill-tag">Python</span><span class="skill-tag">Statistics</span><span class="skill-tag">Probability Theory</span><span class="skill-tag">ETL</span><span class="skill-tag">Star Schema</span><span class="skill-tag">KPI Design</span><span class="skill-tag">StarUML</span></div>
+    </div>
+    <div class="skill-cat reveal">
+      <div class="skill-cat-head"><div class="skill-cat-icon"><i class="fa-solid fa-server"></i></div><span class="skill-cat-name">Information Systems</span></div>
+      <div class="skill-tags"><span class="skill-tag">Process Modelling</span><span class="skill-tag">BPMN</span><span class="skill-tag">ERP Systems</span><span class="skill-tag">Database Design</span><span class="skill-tag">Requirements Engineering</span><span class="skill-tag">User Stories</span><span class="skill-tag">System Prototyping</span><span class="skill-tag">Digital Transformation</span></div>
+    </div>
+    <div class="skill-cat reveal">
+      <div class="skill-cat-head"><div class="skill-cat-icon"><i class="fa-solid fa-briefcase"></i></div><span class="skill-cat-name">Business &amp; Strategy</span></div>
+      <div class="skill-tags"><span class="skill-tag">Strategic Management</span><span class="skill-tag">Operations Research</span><span class="skill-tag">Project Management</span><span class="skill-tag">Business Analysis</span><span class="skill-tag">Mathematical Programming</span><span class="skill-tag">Optimisation</span></div>
+    </div>
+    <div class="skill-cat reveal">
+      <div class="skill-cat-head"><div class="skill-cat-icon"><i class="fa-solid fa-globe"></i></div><span class="skill-cat-name">Languages &amp; Soft Skills</span></div>
+      <div class="skill-tags"><span class="skill-tag">Greek &mdash; Native</span><span class="skill-tag">English &mdash; C2</span><span class="skill-tag">Data Storytelling</span><span class="skill-tag">Critical Thinking</span><span class="skill-tag">Cross-Cultural Collab</span><span class="skill-tag">Adaptability</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label"><div class="sl-line"></div><span class="sl-text">Projects</span></div>
+  <h2>Selected work</h2>
+  <div class="projects-grid">
+
+    <div class="proj-card reveal">
+      <div class="proj-logo-banner dark"><img src="novus-logo.png" alt="Novus"/></div>
+      <div class="proj-top">
+        <div class="proj-type">Information Systems &middot; ERP Prototype</div>
+        <div class="proj-name">Novus</div>
+        <div class="proj-sub">Production Management ERP &mdash; Interactive Prototype</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Interactive ERP prototype designed for manufacturing SMEs, digitalising production operations through role-specific dashboards, task management, and real-time inventory visibility.</p>
+        <ul class="feat-list">
+          <li>Role-based login: CEO / CFO / Sales / Production / Factory views</li>
+          <li>Financial KPIs, operational metrics and reporting dashboards</li>
+          <li>Inventory &amp; order management with CRUD operations</li>
+          <li>Task tracker and internal notification centre</li>
+        </ul>
+        <div class="proj-tags"><span class="proj-tag">HTML</span><span class="proj-tag">CSS</span><span class="proj-tag">JavaScript</span><span class="proj-tag">RBAC</span><span class="proj-tag">Process Modelling</span></div>
+      </div>
+      <div class="proj-foot">
+        <button class="proj-link" onclick="openModal('novusModal')"><i class="fa-solid fa-images"></i> Screenshots</button>
+        <span class="proj-link-sep">|</span>
+        <a href="https://github.com/mariakontopoulou/novus" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-logo-banner forest"><img src="ecodine-logo.png" alt="EcoDine"/></div>
+      <div class="proj-top">
+        <div class="proj-type">Full-Stack &middot; Java / Spring Boot &middot; 2024</div>
+        <div class="proj-name">EcoDine</div>
+        <div class="proj-sub">Restaurant Management System &mdash; Sustainability Focused</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">A sustainability-focused restaurant platform that reduces food waste by turning expiring stock into revenue &mdash; connecting operations management with the customer ordering experience.</p>
+        <ul class="feat-list">
+          <li>Knapsack + Greedy algorithms for expiry-optimised dish recommendations</li>
+          <li>Spoonacular API integration for recipe matching from expiring stock</li>
+          <li>B2B dashboard with 8 KPIs including Profit/Dish and Inventory Turnover</li>
+          <li>B2C smart menu with allergen filters, ordering and payment</li>
+        </ul>
+        <div class="proj-tags"><span class="proj-tag">Java</span><span class="proj-tag">Spring Boot</span><span class="proj-tag">SQL</span><span class="proj-tag">JavaScript</span><span class="proj-tag">Spoonacular API</span></div>
+      </div>
+      <div class="proj-foot">
+        <a href="https://github.com/Stelios169/Binary-7" target="_blank" class="proj-link"><i class="fa-brands fa-github"></i> GitHub</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-type-header">
+        <div class="proj-type-icon"><i class="fa-solid fa-chart-column"></i></div>
+        <div class="proj-type" style="margin-bottom:0">Business Intelligence &middot; Power BI</div>
+      </div>
+      <div class="proj-top nbt">
+        <div class="proj-name">Sales Insights</div>
+        <div class="proj-sub">Sales Data Analysis &amp; Interactive Dashboard</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Business intelligence report uncovering sales trends, market dependencies, and performance risks from raw data &mdash; designed to support data-driven decision-making for management.</p>
+        <ul class="feat-list">
+          <li>Power Query cleaning: deduplication, format fixes, column restructuring</li>
+          <li>Star Schema design for optimised query performance</li>
+          <li>Single-market dependency risk &mdash; 52% of revenue from one region</li>
+          <li>Sharp revenue decline in early 2020 flagged for review</li>
+        </ul>
+        <div class="proj-tags"><span class="proj-tag">Power BI</span><span class="proj-tag">Power Query</span><span class="proj-tag">SQL</span><span class="proj-tag">StarUML</span><span class="proj-tag">ETL</span></div>
+      </div>
+      <div class="proj-foot">
+        <button class="proj-link" onclick="openModal('pbiModal')"><i class="fa-solid fa-circle-info"></i> How to View</button>
+        <span class="proj-link-sep">|</span>
+        <a href="Sales_insight.pbit" download="Sales_insight.pbit" class="proj-link"><i class="fa-solid fa-download"></i> Download .pbit</a>
+      </div>
+    </div>
+
+    <div class="proj-card reveal">
+      <div class="proj-type-header">
+        <div class="proj-type-icon"><i class="fa-solid fa-plane"></i></div>
+        <div class="proj-type" style="margin-bottom:0">Data Analytics &middot; Tableau</div>
+      </div>
+      <div class="proj-top nbt">
+        <div class="proj-name">Airline Operations</div>
+        <div class="proj-sub">Aviation Performance &amp; Traffic Analysis Dashboard</div>
+      </div>
+      <div class="proj-body">
+        <p class="proj-desc">Operations analytics dashboard tracking flight performance across global regions, identifying cancellation patterns, delay trends, and traffic distribution to support strategic planning.</p>
+        <ul class="feat-list">
+          <li>Calculated Fields classifying flights: On Time / Delayed / Cancelled</li>
+          <li>Parameter-driven filters replacing static controls for faster exploration</li>
+          <li>North America identified as dominant traffic region globally</li>
+          <li>Dark theme with consistent colour coding across Line, Map, and Bar charts</li>
+        </ul>
+        <div class="proj-tags"><span class="proj-tag">Tableau Public</span><span class="proj-tag">Calculated Fields</span><span class="proj-tag">Parameters</span><span class="proj-tag">Kaggle CSV</span></div>
+      </div>
+      <div class="proj-foot">
+        <a href="https://public.tableau.com/views/AirlinesProject_17669822845040/AirlineProject?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" class="proj-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Live Dashboard</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-label"><div class="sl-line"></div><span class="sl-text">Experience</span></div>
+  <h2>Work history</h2>
+  <div class="exp-grid reveal">
+    <div class="exp-card">
+      <div class="exp-badge"><i class="fa-solid fa-heart" style="font-size:.55rem"></i> Volunteer</div>
+      <div class="exp-date">2023 &ndash; Present</div>
+      <div class="exp-role">Volunteer</div>
+      <div class="exp-co">ThinkBiz &middot; Athens, Greece</div>
+      <ul class="exp-pts">
+        <li>Organised and supported business &amp; networking events for students and young professionals.</li>
+        <li>Collaborated within cross-functional volunteer teams, strengthening coordination and communication skills.</li>
+        <li>Supported community-building initiatives promoting entrepreneurship among university students.</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-date">Summer 2024 &amp; 2025</div>
+      <div class="exp-role">Bartender</div>
+      <div class="exp-co">Hospitality Sector &middot; Kalamata, Greece</div>
+      <ul class="exp-pts">
+        <li>Worked evening and late-night shifts (17:00&ndash;01:00) and overnight party events, managing the bar independently.</li>
+        <li>Handled an average of ~100 orders per shift solo, maintaining speed and quality under high-volume pressure.</li>
+        <li>Demonstrated strong multitasking, composure, and customer-service skills in a fast-paced environment.</li>
+      </ul>
+    </div>
+    <div class="exp-card">
+      <div class="exp-date">Jun 2023 &ndash; Sep 2023</div>
+      <div class="exp-role">Sales Consultant</div>
+      <div class="exp-co">Praktiker Hellas &middot; Kalamata, Greece</div>
+      <ul class="exp-pts">
+        <li>Consistently hit sales targets through personalised customer engagement and effective product presentation.</li>
+        <li>Analysed customer needs and technical specs to recommend optimal solutions and drive revenue growth.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label"><div class="sl-line"></div><span class="sl-text">Contact</span></div>
+  <h2>Let's talk</h2>
+  <div class="contact-grid reveal">
+    <div>
+      <p class="contact-intro-text">Always open to connecting &mdash; whether it's a collaboration, a professional opportunity, a thesis partnership, or simply a conversation about data, technology and business.</p>
+      <div class="contact-methods">
+        
+        <a href="https://www.linkedin.com/in/angelos-tsekos" target="_blank" class="cm-link">
+          <div class="cm-icon"><i class="fa-brands fa-linkedin"></i></div>
+          <div><div class="cm-label">linkedin.com/in/angelos-tsekos</div><div class="cm-value">LinkedIn &mdash; connect &amp; message</div></div>
+          <i class="fa-solid fa-arrow-right cm-arrow"></i>
+        </a>
+        <a href="https://github.com/angelostsekos" target="_blank" class="cm-link">
+          <div class="cm-icon"><i class="fa-brands fa-github"></i></div>
+          <div><div class="cm-label">github.com/angelostsekos</div><div class="cm-value">Browse project repositories</div></div>
+          <i class="fa-solid fa-arrow-right cm-arrow"></i>
+        </a>
+        <a href="tel:+306980170719" class="cm-link">
+          <div class="cm-icon"><i class="fa-solid fa-phone"></i></div>
+          <div><div class="cm-label">+30 698 017 0719</div><div class="cm-value">Phone &mdash; feel free to call or text</div></div>
+          <i class="fa-solid fa-arrow-right cm-arrow"></i>
+        </a>
+      </div>
+    </div>
+    <form class="contact-form" id="contactForm" action="https://formspree.io/f/myknpakv" method="POST">
+      <div class="form-row">
+        <div class="fgroup"><label>Full Name</label><input type="text" name="name" placeholder="e.g. Maria Papadopoulou" required/></div>
+        <div class="fgroup"><label>Company / University</label><input type="text" name="company" placeholder="e.g. Deloitte, AUEB..."/></div>
+      </div>
+      <div class="fgroup"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required/></div>
+      <div class="fgroup">
+        <label>Reason for Contact</label>
+        <select name="reason">
+          <option value="" disabled selected>Select one...</option>
+          <option>Job / Internship Opportunity</option>
+          <option>Thesis / Research Collaboration</option>
+          <option>Project Partnership</option>
+          <option>Freelance / Consulting</option>
+          <option>Networking</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fgroup"><label>Message</label><textarea name="message" placeholder="Describe what you have in mind -- I reply within 24-48 hours." required></textarea></div>
+      <input type="hidden" name="_subject" value="New message from portfolio"/>
+      <p class="form-note">All enquiries welcome.</p>
+      <div class="form-success" id="formSuccess">Message sent -- I will get back to you within 48 hours!</div>
+      <div class="form-error" id="formError">Something went wrong. Please email me directly.</div>
+      <button type="submit" class="btn btn-primary" style="align-self:flex-start" id="submitBtn">
+        <i class="fa-solid fa-paper-plane"></i> Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2025 <a href="#">Angelos Tsekos</a> &middot; Athens, Greece &middot; Built with HTML, CSS &amp; JS</p>
+</footer>
+
+<div class="modal-overlay" id="novusModal" onclick="closeOutside(event,'novusModal')">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title">Novus &mdash; ERP Prototype</span>
+      <div class="modal-close" onclick="closeModal('novusModal')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:.8rem">
+        <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+          <div style="background:var(--bg);padding:.5rem .9rem;border-bottom:1px solid var(--border);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)">Task Management</div>
+          <img src="novus-1.png" style="width:100%;display:block" alt="Task Management"/>
+        </div>
+        <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+          <div style="background:var(--bg);padding:.5rem .9rem;border-bottom:1px solid var(--border);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)">Financial Dashboard</div>
+          <img src="novus-2.png" style="width:100%;display:block" alt="Financial Dashboard"/>
+        </div>
+        <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border)">
+          <div style="background:var(--bg);padding:.5rem .9rem;border-bottom:1px solid var(--border);font-size:.7rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)">Manager Dashboard</div>
+          <img src="novus-3.png" style="width:100%;display:block" alt="Manager Dashboard"/>
+        </div>
+      </div>
+      <div style="background:var(--accent-bg);border:1px solid var(--accent-bd);border-radius:8px;padding:1.1rem 1.3rem">
+        <div style="font-size:.67rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem">Business Analysis Process</div>
+        <div style="display:flex;flex-direction:column;gap:.55rem">
+          <div style="display:flex;gap:.8rem;align-items:flex-start">
+            <i class="fa-solid fa-magnifying-glass" style="color:var(--accent);font-size:.78rem;margin-top:.25rem;flex-shrink:0"></i>
+            <div><span style="font-size:.81rem;font-weight:600;color:var(--ink)">Requirements Elicitation</span><span style="font-size:.78rem;color:var(--ink2);font-weight:300;display:block;line-height:1.6">Conducted stakeholder interviews with management, production staff and warehouse teams to capture operational needs and pain points across all hierarchy levels.</span></div>
+          </div>
+          <div style="display:flex;gap:.8rem;align-items:flex-start">
+            <i class="fa-solid fa-file-lines" style="color:var(--accent);font-size:.78rem;margin-top:.25rem;flex-shrink:0"></i>
+            <div><span style="font-size:.81rem;font-weight:600;color:var(--ink)">User Stories &amp; Acceptance Criteria</span><span style="font-size:.78rem;color:var(--ink2);font-weight:300;display:block;line-height:1.6">Translated business requirements into structured user stories (As a [role], I want to... so that...) with clear acceptance criteria to guide the design of each module.</span></div>
+          </div>
+          <div style="display:flex;gap:.8rem;align-items:flex-start">
+            <i class="fa-solid fa-diagram-project" style="color:var(--accent);font-size:.78rem;margin-top:.25rem;flex-shrink:0"></i>
+            <div><span style="font-size:.81rem;font-weight:600;color:var(--ink)">Process Modelling &amp; BPMN</span><span style="font-size:.78rem;color:var(--ink2);font-weight:300;display:block;line-height:1.6">Mapped the full production workflow using BPMN diagrams &mdash; from raw material intake to finished product dispatch &mdash; to identify bottlenecks and digitisation opportunities.</span></div>
+          </div>
+          <div style="display:flex;gap:.8rem;align-items:flex-start">
+            <i class="fa-solid fa-sitemap" style="color:var(--accent);font-size:.78rem;margin-top:.25rem;flex-shrink:0"></i>
+            <div><span style="font-size:.81rem;font-weight:600;color:var(--ink)">System Architecture &amp; Prototyping</span><span style="font-size:.78rem;color:var(--ink2);font-weight:300;display:block;line-height:1.6">Designed a modular system architecture with five distinct role-based views, then built a high-fidelity interactive prototype to validate requirements and gather early feedback.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-features">
+        <div class="modal-feat"><div class="modal-feat-title"><i class="fa-solid fa-shield-halved"></i>Role-Based Access Control</div><div class="modal-feat-desc">CEO, CFO, Sales, Production Manager and Factory Worker each get a tailored interface with appropriate access levels.</div></div>
+        <div class="modal-feat"><div class="modal-feat-title"><i class="fa-solid fa-chart-line"></i>Financial &amp; Operational KPIs</div><div class="modal-feat-desc">Live dashboards show revenue, profit margins, production efficiency, order volumes and inventory status.</div></div>
+        <div class="modal-feat"><div class="modal-feat-title"><i class="fa-solid fa-boxes-stacked"></i>Inventory &amp; Order Management</div><div class="modal-feat-desc">Full CRUD simulation for stock and orders, including low-stock alerts and order tracking workflows.</div></div>
+        <div class="modal-feat"><div class="modal-feat-title"><i class="fa-solid fa-list-check"></i>Task &amp; Workflow Tracker</div><div class="modal-feat-desc">Managers assign tasks, track status from Pending to In Progress to Completed with deadline visibility.</div></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <a href="https://github.com/mariakontopoulou/novus" target="_blank" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> GitHub</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="pbiModal" onclick="closeOutside(event,'pbiModal')">
+  <div class="modal modal-sm">
+    <div class="modal-head">
+      <span class="modal-title">How to view the dashboard</span>
+      <div class="modal-close" onclick="closeModal('pbiModal')"><i class="fa-solid fa-xmark"></i></div>
+    </div>
+    <div class="modal-body">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div><div class="step-title">Download Power BI Desktop</div><div class="step-desc">Free Microsoft app &mdash; search "Power BI Desktop" on microsoft.com or the Microsoft Store and install it.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div><div class="step-title">Download the .pbit file</div><div class="step-desc">Click the download button below to save the Sales Insights template to your computer.</div></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div><div class="step-title">Open and explore</div><div class="step-desc">Double-click the downloaded file &mdash; it opens in Power BI Desktop with all visuals and data ready.</div></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <a href="Sales_insight.pbit" download="Sales_insight.pbit" class="btn btn-primary btn-sm"><i class="fa-solid fa-download"></i> Download .pbit</a>
+      <button onclick="closeModal('pbiModal')" class="btn btn-outline btn-sm">Close</button>
+    </div>
+  </div>
+</div>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+<style>
+#btt{position:fixed;bottom:2rem;right:2rem;z-index:150;width:42px;height:42px;border-radius:50%;background:var(--ink);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;opacity:0;transform:translateY(10px);transition:opacity .3s,transform .3s,background .2s;box-shadow:0 4px 16px rgba(0,0,0,0.15)}
+#btt.visible{opacity:1;transform:translateY(0)}
+#btt:hover{background:var(--accent)}
+</style>
+<script>
+(function(){
+  var e=String.fromCharCode(97,103,103,101,108,111,115,116,115,101,107,111,115,50,48,48,53,64,103,109,97,105,108,46,99,111,109);
+  document.getElementById('eml').textContent=e;
+})();
+window.addEventListener('scroll',()=>{
+  const y=window.scrollY;
+  document.getElementById('nav').classList.toggle('scrolled',y>40);
+  document.getElementById('btt').classList.toggle('visible',y>400);
+});
+
+// Active nav
+function updateNav(){
+  var ids=['about','skills','projects','experience','contact'];
+  var best='';
+  ids.forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    var rect=el.getBoundingClientRect();
+    if(rect.top<=160) best=id;
+  });
+  document.querySelectorAll('.nav-links a').forEach(function(a){
+    var href=a.getAttribute('href');
+    if(!href||!href.startsWith('#')) return;
+    var active=href==='#'+best;
+    a.classList.toggle('nav-active',active);
+  });
+}
+window.addEventListener('scroll',updateNav,{passive:true});
+window.addEventListener('load',updateNav);
+updateNav();
+
+function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden';}
+function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow='';}
+function closeOutside(e,id){if(e.target===document.getElementById(id))closeModal(id);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow='';});});
+
+document.getElementById('contactForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.disabled=true;btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+  try{
+    const res=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{Accept:'application/json'}});
+    if(res.ok){document.getElementById('formSuccess').style.display='block';document.getElementById('formError').style.display='none';this.reset();btn.innerHTML='<i class="fa-solid fa-check"></i> Sent!';}
+    else throw new Error();
+  }catch{document.getElementById('formError').style.display='block';btn.disabled=false;btn.innerHTML='<i class="fa-solid fa-paper-plane"></i> Send Message';}
+});
+</script>
+</body>
+</html>
